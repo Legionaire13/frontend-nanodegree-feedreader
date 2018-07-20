@@ -11,12 +11,15 @@ Rss Feeds:
   are defined
   have every URL defined and that the URL is not empty
   have every feed has it's name and that the name is not empty
+
 The Menu:
   default state is "hidden"
   changes visibility if clicked
   changes visibility if clicked once again
+
 Initial Entries:
   feed has at least one entry element
+  
 New Feed Selection:
   content changes when a new feed is loaded
 ```
