@@ -28,7 +28,6 @@ $(function () {
         it("have every url defined", function () {
             for (var feed of allFeeds) {
                 expect(feed.url).toBeDefined();
-                expect(feed.url).toContain("http://");
                 expect(feed.url.length).not.toBe(0);
             }
         });
@@ -57,26 +56,20 @@ $(function () {
         });
 
         /* Test that ensures the menu changes visibility when the menu icon is clicked and hides when clicked again. */
-        it("changes visibility on first click", function () {
+        it("becomes visible if clicked and then hides if clicked again", function () {
             menuIconLink = document.querySelector(".menu-icon-link");
-            menuIconLink.click(); //triggers event
-
+            menuIconLink.click(); //first click call
             buffer = document.querySelector("body");
             isHidden = buffer.classList.contains("menu-hidden");
 
-            expect(isHidden).toBeFalsy();
-        });
-        /* Testing the second click */
-        it("changes visibility if clicked again", function () {
-            menuIconLink = document.querySelector(".menu-icon-link");
-            menuIconLink.click(); //triggers event via Jquery
+            expect(isHidden).toBeFalsy(); //first expectation
 
+            menuIconLink.click(); //second click call
             buffer = document.querySelector("body");
             isHidden = buffer.classList.contains("menu-hidden");
 
-            expect(isHidden).toBeTruthy();
+            expect(isHidden).toBeTruthy(); //second expectation
         });
-
     });
 
     /* "Initial Entries" */
@@ -84,16 +77,13 @@ $(function () {
 
         /* Test that ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container.*/
         beforeEach(function (done) {
-            loadFeed(0, function () {
-                done();
-            });
+            loadFeed(0, done);
         });
 
-        it("feed has at least one entry element", function (done) {
+        it("feed has at least one entry element", function () {
             let feed;
-            feed = document.querySelector(".feed");
-            expect(feed.childElementCount).not.toBe(0);
-            done();
+            feed = document.querySelectorAll(".feed .entry");
+            expect(feed.length).not.toBe(0);
         });
     });
 
@@ -105,11 +95,10 @@ $(function () {
         beforeEach(function (done) {
             loadFeed(0, function () {
                 firstFeedLoaded = document.querySelector(".feed").innerHTML;
-                done();
-            });
-            loadFeed(1, function () {
-                secondFeedLoaded = document.querySelector(".feed").innerHTML;
-                done();
+                loadFeed(1, function () {
+                    secondFeedLoaded = document.querySelector(".feed").innerHTML;
+                    done();
+                });
             });
         });
 

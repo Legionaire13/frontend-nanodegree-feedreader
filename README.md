@@ -14,8 +14,7 @@ Rss Feeds:
 
 The Menu:
   default state is "hidden"
-  changes visibility if clicked
-  changes visibility if clicked once again
+  becomes visible if clicked and then hides if clicked again
 
 Initial Entries:
   feed has at least one entry element
